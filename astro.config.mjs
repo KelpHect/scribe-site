@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://scribe.mariosilva.dev',
+  site: 'https://scribe.rusticstack.com',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
