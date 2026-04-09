@@ -1,28 +1,24 @@
-# Scribe site
+# Scribe Site
 
-This is the public landing page for Scribe. One page, static output, no fluff.
+Landing page for [Scribe](https://github.com/KelpHect/Scribe) — a desktop ESO addon manager.
 
-It exists to do three things:
+Built with Astro and Tailwind CSS. Single-screen dark layout, screenshot slideshow, download buttons for Windows / Linux / macOS.
 
-- show what the app looks like
-- link to the repo
-- link straight to the latest release downloads
-
-## Stack
-
-- Astro
-- Tailwind CSS
-
-## Commands
+## Dev
 
 ```bash
 npm install
 npm run dev
+```
+
+## Build
+
+```bash
 npm run build
 ```
 
-## Notes
+Output goes to `dist/`. Deployed via GitHub Pages.
 
-- screenshots live in `public/app-examples/`
-- release links point at GitHub's `releases/latest/download/...` endpoints
-- the site keeps the same Scribe, Neutral, and Dark themes as the app
+## License
+
+MIT
