@@ -6,7 +6,7 @@ const platforms = [
     name: 'Windows',
     icon: '/icons/windows.svg',
     requirements: ['Windows 10+', '64-bit', '~5 MB download'],
-    notes: 'Download the .exe and run it. SmartScreen might complain on first launch — click "More info" then "Run anyway".'
+    notes: 'Download the .exe and run it. SmartScreen might complain on first launch | click "More info" then "Run anyway".'
   },
   {
     name: 'Linux',
@@ -24,7 +24,7 @@ const platforms = [
 ---
 
 <Layout
-  title="Supported Platforms — Scribe ESO Addon Manager"
+  title="Supported Platforms | Scribe ESO Addon Manager"
   description="Scribe runs on Windows (~5 MB), Linux (<5 MB), and macOS (~14 MB). Native builds, ~50-60 MB RAM."
   breadcrumb={[{ label: 'Platforms', href: '/supported-platforms' }]}
 >
@@ -52,7 +52,7 @@ const platforms = [
       <p>Scribe sits around 50-60 MB of RAM regardless of how many addons you have. The installed addon list uses virtualized rendering so even hundreds of addons don't bloat the DOM. The remote catalog is cached in a local SQLite database so repeat launches skip the network entirely.</p>
 
       <h2>ESO on Linux via Proton</h2>
-      <p>If you run ESO through Proton or Wine, Scribe can still manage your addons — just point it to the AddOns folder inside your compatibility layer directory.</p>
+      <p>If you run ESO through Proton or Wine, Scribe can still manage your addons | just point it to the AddOns folder inside your compatibility layer directory.</p>
 
       <div style="margin-top: 2.5rem; text-align: center;">
         <a href="/download" class="dl">Download Scribe</a>

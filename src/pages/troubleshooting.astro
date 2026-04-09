@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Troubleshooting — Scribe ESO Addon Manager"
+  title="Troubleshooting | Scribe ESO Addon Manager"
   description="Fix common Scribe issues: addon not loading, path detection problems, update errors, macOS Gatekeeper, Windows SmartScreen."
   breadcrumb={[{ label: 'Guides', href: '#' }, { label: 'Troubleshooting', href: '/troubleshooting' }]}
 >
@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
       <h2>Scribe can't find my AddOns folder</h2>
       <p>Scribe auto-detects the default path. If it can't:</p>
       <ol>
-        <li>Make sure ESO is installed and has been launched at least once — that's what creates the AddOns folder</li>
+        <li>Make sure ESO is installed and has been launched at least once | that's what creates the AddOns folder</li>
         <li>Check the default path:
           <ul>
             <li><strong>Windows:</strong> <code>C:\Users\You\Documents\Elder Scrolls Online\live\AddOns</code></li>
@@ -28,16 +28,16 @@ import Layout from '../layouts/Layout.astro';
 
       <h2>Addon installed but not showing up in ESO</h2>
       <ul>
-        <li>Check the "Installed" tab in Scribe — is it actually there?</li>
+        <li>Check the "Installed" tab in Scribe | is it actually there?</li>
         <li>Verify the files landed in the right AddOns folder</li>
         <li>Some addons need dependencies. Check if any are listed as missing</li>
-        <li>Restart ESO completely — it won't pick up addon changes while running</li>
+        <li>Restart ESO completely | it won't pick up addon changes while running</li>
       </ul>
 
       <h2>Addon update fails</h2>
       <ul>
         <li>Check your connection</li>
-        <li>The addon source might be down temporarily — try again in a bit</li>
+        <li>The addon source might be down temporarily | try again in a bit</li>
         <li>If it keeps failing, uninstall and reinstall the addon</li>
         <li>Still broken? <a href="https://github.com/KelpHect/Scribe/issues" target="_blank" rel="noopener noreferrer">File an issue</a> with the addon name and the error</li>
       </ul>
