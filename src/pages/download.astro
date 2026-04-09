@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const downloads = [
+  {
+    label: 'Windows',
+    href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.3/Scribe-windows-amd64.exe',
+    icon: '/icons/windows.svg',
+    notes: '~5 MB. Windows 10+, 64-bit.'
+  },
+  {
+    label: 'Linux',
+    href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.3/Scribe-linux-amd64',
+    icon: '/icons/linux.svg',
+    notes: '<5 MB. x86_64, most distros.'
+  },
+  {
+    label: 'macOS',
+    href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.3/Scribe-macos-universal.zip',
+    icon: '/icons/apple.svg',
+    notes: '~14 MB. macOS 11+, universal binary.'
+  }
+];
+---
+
+<Layout
+  title="Download Scribe — Free ESO Addon Manager for Windows, Linux, macOS"
+  description="Download Scribe for Windows (~5 MB), Linux (<5 MB), or macOS (~14 MB). Free, open-source, no account required. Opens instantly."
+  breadcrumb={[{ label: 'Download', href: '/download' }]}
+>
+  <div class="page">
+    <div class="page__inner">
+      <h1>Download</h1>
+      <p class="subtitle">Pick your platform. No account, no installer bloat. Latest: v1.0.3.</p>
+
+      <div class="dl-grid">
+        {downloads.map(dl => (
+          <a href={dl.href} class="dl-card">
+            <img src={dl.icon} alt="" class="dl-card__icon" width="28" height="28" />
+            <div>
+              <p class="dl-card__label">{dl.label}</p>
+              <p class="dl-card__notes">{dl.notes}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <h2>What you need</h2>
+      <ul>
+        <li><strong>OS:</strong> Windows 10+, macOS 11+, or a modern Linux distro</li>
+        <li><strong>RAM:</strong> ~50-60 MB while running</li>
+        <li><strong>ESO:</strong> Installed with the AddOns folder present</li>
+      </ul>
+
+      <h2>Install</h2>
+
+      <h3>Windows</h3>
+      <ol>
+        <li>Download <code>Scribe-windows-amd64.exe</code></li>
+        <li>Run it. SmartScreen may complain — click "More info" then "Run anyway"</li>
+        <li>Confirm your ESO AddOns path when it asks</li>
+      </ol>
+
+      <h3>Linux</h3>
+      <ol>
+        <li>Download <code>Scribe-linux-amd64</code></li>
+        <li><code>chmod +x Scribe-linux-amd64</code></li>
+        <li><code>./Scribe-linux-amd64</code></li>
+      </ol>
+
+      <h3>macOS</h3>
+      <ol>
+        <li>Download <code>Scribe-macos-universal.zip</code></li>
+        <li>Extract and drop it in Applications</li>
+        <li>First launch: right-click → Open to get past Gatekeeper</li>
+      </ol>
+
+      <h2>Verify</h2>
+      <p>Check <a href="https://github.com/KelpHect/Scribe/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a> for file sizes and checksums. See the <a href="/changelog">changelog</a> for what changed.</p>
+    </div>
+  </div>
+</Layout>

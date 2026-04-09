@@ -9,7 +9,6 @@ const OUT = join(__dirname, '..', 'public', 'og.png');
 
 async function main() {
   const fontPath = join(__dirname, 'Inter-Bold.woff2');
-  /** @type {ArrayBuffer} */
   let fontData;
 
   if (existsSync(fontPath)) {
@@ -23,6 +22,13 @@ async function main() {
   const logoData = readFileSync(logoPath);
   const logoB64 = `data:image/png;base64,${logoData.toString('base64')}`;
 
+  const screenshotPath = join(__dirname, '..', 'public', 'app-examples', 'installed.webp');
+  const screenshotPng = await sharp(screenshotPath)
+    .resize(560, 384, { fit: 'cover' })
+    .png()
+    .toBuffer();
+  const screenshotB64 = `data:image/png;base64,${screenshotPng.toString('base64')}`;
+
   const svg = await satori(
     {
       type: 'div',
@@ -31,21 +37,86 @@ async function main() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          flexDirection: 'row',
           backgroundColor: '#09090b',
           fontFamily: 'Inter',
-          gap: 24,
         },
         children: [
           {
-            type: 'img',
+            type: 'div',
             props: {
-              src: logoB64,
-              width: 180,
-              height: 180,
-              style: { borderRadius: 32 },
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                paddingLeft: 72,
+                paddingRight: 32,
+                gap: 20,
+                flex: '0 0 52%',
+              },
+              children: [
+                {
+                  type: 'img',
+                  props: {
+                    src: logoB64,
+                    width: 80,
+                    height: 80,
+                    style: { borderRadius: 18 },
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 8,
+                    },
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: 48,
+                            fontWeight: 800,
+                            color: '#fafafa',
+                            letterSpacing: '-0.04em',
+                          },
+                          children: 'Scribe',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: 18,
+                            color: '#71717a',
+                            fontWeight: 500,
+                            maxWidth: 440,
+                            lineHeight: 1.4,
+                          },
+                          children: 'A fast ESO addon manager for people who are done babysitting Minion.',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: 14,
+                            color: '#3f3f46',
+                            marginTop: 4,
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            fontWeight: 600,
+                          },
+                          children: 'Windows \u00B7 Linux \u00B7 macOS',
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
             },
           },
           {
@@ -53,48 +124,34 @@ async function main() {
             props: {
               style: {
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
-                gap: 8,
+                justifyContent: 'center',
+                paddingRight: 64,
+                paddingLeft: 16,
+                flex: '0 0 48%',
               },
               children: [
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: 56,
-                      fontWeight: 800,
-                      color: '#fafafa',
-                      letterSpacing: '-0.04em',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 0,
+                      borderRadius: 12,
+                      overflow: 'hidden',
+                      border: '1px solid rgba(255,255,255,0.06)',
                     },
-                    children: 'Scribe',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: 22,
-                      color: '#71717a',
-                      fontWeight: 500,
-                      maxWidth: 600,
-                      textAlign: 'center',
-                    },
-                    children: 'A fast ESO addon manager for people who are done babysitting Minion.',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: 16,
-                      color: '#3f3f46',
-                      marginTop: 8,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      fontWeight: 600,
-                    },
-                    children: 'Windows \u00B7 Linux \u00B7 macOS',
+                    children: [
+                      {
+                        type: 'img',
+                        props: {
+                          src: screenshotB64,
+                          width: 480,
+                          height: 329,
+                        },
+                      },
+                    ],
                   },
                 },
               ],

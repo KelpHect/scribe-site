@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const platforms = [
+  {
+    name: 'Windows',
+    icon: '/icons/windows.svg',
+    requirements: ['Windows 10+', '64-bit', '~5 MB download'],
+    notes: 'Download the .exe and run it. SmartScreen might complain on first launch — click "More info" then "Run anyway".'
+  },
+  {
+    name: 'Linux',
+    icon: '/icons/linux.svg',
+    requirements: ['Modern 64-bit distro', 'x86_64 / AMD64', '<5 MB download'],
+    notes: 'chmod +x the binary and run it. Tested on Ubuntu, Fedora, Arch.'
+  },
+  {
+    name: 'macOS',
+    icon: '/icons/apple.svg',
+    requirements: ['macOS 11+ (Big Sur)', 'Universal: Intel & Apple Silicon', '~14 MB download'],
+    notes: 'Extract the zip, drop it in Applications. First launch: right-click → Open to bypass Gatekeeper.'
+  },
+];
+---
+
+<Layout
+  title="Supported Platforms — Scribe ESO Addon Manager"
+  description="Scribe runs on Windows (~5 MB), Linux (<5 MB), and macOS (~14 MB). Native builds, ~50-60 MB RAM."
+  breadcrumb={[{ label: 'Platforms', href: '/supported-platforms' }]}
+>
+  <div class="page">
+    <div class="page__inner">
+      <h1>Platforms</h1>
+      <p class="subtitle">Windows, Linux, macOS. Native binaries, no runtime dependencies.</p>
+
+      {platforms.map(p => (
+        <div class="platform-card">
+          <div class="platform-card__header">
+            <img src={p.icon} alt="" class="platform-card__icon" width="22" height="22" />
+            <h2>{p.name}</h2>
+          </div>
+          <ul>
+            {p.requirements.map(r => (
+              <li>{r}</li>
+            ))}
+          </ul>
+          <p>{p.notes}</p>
+        </div>
+      ))}
+
+      <h2>About RAM usage</h2>
+      <p>Scribe sits around 50-60 MB of RAM regardless of how many addons you have. The installed addon list uses virtualized rendering so even hundreds of addons don't bloat the DOM. The remote catalog is cached in a local SQLite database so repeat launches skip the network entirely.</p>
+
+      <h2>ESO on Linux via Proton</h2>
+      <p>If you run ESO through Proton or Wine, Scribe can still manage your addons — just point it to the AddOns folder inside your compatibility layer directory.</p>
+
+      <div style="margin-top: 2.5rem; text-align: center;">
+        <a href="/download" class="dl">Download Scribe</a>
+      </div>
+    </div>
+  </div>
+</Layout>

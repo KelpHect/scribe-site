@@ -1,43 +1,66 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import installedImg from '../assets/installed.webp';
+import findMoreImg from '../assets/find-more.webp';
+import dependenciesImg from '../assets/dependencies.webp';
+import addonDetailsImg from '../assets/addon-details.webp';
+import addonDetailsLightboxImg from '../assets/addon-details-lightbox.webp';
+import addonDetailsInstalledImg from '../assets/addon-details-installed.webp';
 
 const repoUrl = 'https://github.com/KelpHect/Scribe';
 
 const downloads = [
-  { label: 'Windows', href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.2/Scribe-windows-amd64.exe', icon: '/icons/windows.svg' },
-  { label: 'Linux',   href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.2/Scribe-linux-amd64',       icon: '/icons/linux.svg'   },
-  { label: 'macOS',   href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.2/Scribe-macos-universal.zip', icon: '/icons/apple.svg' }
+  { label: 'Windows', href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.3/Scribe-windows-amd64.exe', icon: '/icons/windows.svg' },
+  { label: 'Linux',   href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.3/Scribe-linux-amd64',       icon: '/icons/linux.svg'   },
+  { label: 'macOS',   href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.3/Scribe-macos-universal.zip', icon: '/icons/apple.svg' }
 ];
 
 const screenshots = [
-  '/app-examples/installed.webp',
-  '/app-examples/find-more.webp',
-  '/app-examples/dependencies.webp',
-  '/app-examples/addon-details.webp',
-  '/app-examples/addon-details-lightbox.webp',
-  '/app-examples/addon-details-installed.webp'
+  { img: installedImg, alt: 'Installed ESO addons list in Scribe addon manager' },
+  { img: findMoreImg, alt: 'Browse and discover new ESO addons in Scribe' },
+  { img: dependenciesImg, alt: 'Addon dependency management in Scribe' },
+  { img: addonDetailsImg, alt: 'ESO addon details panel in Scribe' },
+  { img: addonDetailsLightboxImg, alt: 'Addon screenshot viewer in Scribe' },
+  { img: addonDetailsInstalledImg, alt: 'Installed addon details view in Scribe' }
 ];
+
+const features = [
+  { title: 'One-click installs', text: 'Find addons, hit install. No ZIP wrangling.' },
+  { title: 'Dependency detection', text: 'Catches required libs from metadata and addon descriptions. Installs them too.' },
+  { title: 'Bulk updates & uninstall', text: 'Update everything at once. Nuke a batch of addons at once. Your call.' },
+  { title: 'Cross-platform', text: 'Windows (~5 MB), Linux (<5 MB), macOS (~14 MB). Native, no Electron.' },
+  { title: 'Free & open source', text: 'MIT license. No ads, no tracking, no premium tier, no account.' },
+  { title: 'Tiny footprint', text: '~50-60 MB RAM. Opens instantly. Virtualized lists handle any addon count.' },
+];
+
+const slideCount = screenshots.length;
 ---
 
 <Layout title="Scribe — Fast ESO Addon Manager" description="Scribe is a fast, free, open-source desktop addon manager for Elder Scrolls Online. Install, update, and manage your ESO addons without the bloat.">
-  <div class="grid-bg" aria-hidden="true"></div>
-  <svg class="noise" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)" opacity="0.035"/></svg>
-
-  <main class="v">
+  <div class="v">
     <header class="head">
       <p class="head__badge">Free &amp; Open Source</p>
       <h1 class="head__title">Scribe</h1>
       <p class="head__sub">A fast ESO addon manager for people who are done babysitting Minion.</p>
       <a href={repoUrl} class="gh">
-        <img src="/icons/github.svg" alt="" class="gh__icon" />
+        <img src="/icons/github.svg" alt="" class="gh__icon" width="14" height="14" />
         <span>View on GitHub</span>
       </a>
     </header>
 
     <section class="stage">
       <div class="img-wrap" id="slides">
-        {screenshots.map((src, i) => (
-          <img src={src} alt={`Scribe screenshot ${i + 1}`} class="slide" data-i={i} loading={i > 0 ? 'lazy' : 'eager'} />
+        {screenshots.map((shot, i) => (
+          <Image
+            src={shot.img}
+            alt={shot.alt}
+            width={1120}
+            height={768}
+            class="slide"
+            data-i={i}
+            loading={i > 0 ? 'lazy' : 'eager'}
+          />
         ))}
       </div>
     </section>
@@ -47,16 +70,65 @@ const screenshots = [
       <div class="foot__links">
         {downloads.map((dl) => (
           <a href={dl.href} class="dl">
-            <img src={dl.icon} alt="" class="dl__icon" />
+            <img src={dl.icon} alt="" class="dl__icon" width="18" height="18" />
             <span>{dl.label}</span>
           </a>
         ))}
       </div>
       <p class="foot__note">Not affiliated with ZeniMax Media, Bethesda, or ESOUI.</p>
     </footer>
-  </main>
+  </div>
 
-  <script define:vars={{ count: screenshots.length }}>
+  <div class="home-sections">
+    <section class="home-section">
+      <h2 class="home-section__title">Why Scribe?</h2>
+      <div class="home-section__grid">
+        {features.map(f => (
+          <div class="feature-card">
+            <p class="feature-card__title">{f.title}</p>
+            <p class="feature-card__text">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="home-section">
+      <h2 class="home-section__title">Get started</h2>
+      <div class="home-section__steps">
+        <div class="step">
+          <p class="step__title">Download</p>
+          <p class="step__text">Grab the binary for your OS from <a href="/download">downloads</a>. It's under 15 MB.</p>
+        </div>
+        <div class="step">
+          <p class="step__title">Point it at ESO</p>
+          <p class="step__text">Auto-detects your AddOns folder. Confirm and you're in.</p>
+        </div>
+        <div class="step">
+          <p class="step__title">Manage addons</p>
+          <p class="step__text">Browse, install, update, uninstall. One click each, or do it in bulk.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <h2 class="home-section__title">Coming from Minion?</h2>
+      <p class="home-compare">
+        Scribe reads your existing addon folder. No migration needed.
+        See the <a href="/minion-alternative">side-by-side comparison</a>.
+      </p>
+    </section>
+
+    <div class="home-cta">
+      <p class="home-cta__title">Ready?</p>
+      <p class="home-cta__text">Free, open source, no account. Under 15 MB download.</p>
+      <div class="home-cta__links">
+        <a href="/download" class="dl">Download Scribe</a>
+        <a href="/features" class="dl">See all features</a>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ count: slideCount }}>
     const slides = document.querySelectorAll('.slide');
     let cur = 0;
     slides[0].classList.add('slide--on');
@@ -66,5 +138,4 @@ const screenshots = [
       slides[cur].classList.add('slide--on');
     }, 3800);
   </script>
-
 </Layout>

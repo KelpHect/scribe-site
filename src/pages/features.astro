@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Features — Scribe ESO Addon Manager"
+  description="One-click installs, automatic dependency detection, bulk updates and uninstall, cross-platform, ~50 MB RAM. Free and open source."
+  breadcrumb={[{ label: 'Features', href: '/features' }]}
+>
+  <div class="page">
+    <div class="page__inner">
+      <h1>What it does</h1>
+      <p class="subtitle">Manage your ESO addons without the bloat. Here's what you get.</p>
+
+      <h2>One-click installs</h2>
+      <p>Find an addon, hit install. Scribe downloads, extracts, and places it — no ZIP wrangling, no manual folder management. Done.</p>
+
+      <h2>Dependency detection</h2>
+      <p>Tons of addons depend on things like LibAddonMenu or LibStub. Scribe catches these from addon metadata <em>and</em> from freeform description text, then offers to install the missing ones in one click.</p>
+
+      <h2>Bulk updates</h2>
+      <p>Update everything at once, or pick individual ones. Scribe checks for new versions on launch so you see what's outdated immediately.</p>
+
+      <h2>Bulk uninstall</h2>
+      <p>Select a bunch of addons, nuke them all at once. Or use the per-addon trash button for single removals.</p>
+
+      <h2>Cross-platform</h2>
+      <p>Native builds for <a href="/supported-platforms">Windows (~5 MB), Linux (&lt;5 MB), and macOS (~14 MB)</a>. Same UI, same features. No Electron, no Java runtime — just Go + the OS webview.</p>
+
+      <h2>Tiny footprint</h2>
+      <p>~50-60 MB RAM while running. Opens instantly — addon lists are virtualized so even hundreds of installed addons don't slow anything down. The remote catalog is cached in SQLite so repeat launches skip the network.</p>
+
+      <h2>Free & open source</h2>
+      <p>MIT licensed. Poke around on <a href="https://github.com/KelpHect/Scribe" target="_blank" rel="noopener noreferrer">GitHub</a>, file issues, send PRs. No ads, no tracking, no premium tier, no account.</p>
+
+      <h2>Picks up existing addons</h2>
+      <p>Point Scribe at your AddOns folder and it detects everything already there. No re-install needed. Works whether you installed stuff manually, through <a href="/minion-alternative">Minion</a>, or however else.</p>
+
+      <h2>Simple uninstall</h2>
+      <p>Click the trash button on any addon to remove its folder. The built-in dependency checker can help you spot unused libraries if you want to clean house.</p>
+
+      <div style="margin-top: 2.5rem; text-align: center;">
+        <a href="/download" class="dl">Download Scribe</a>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Scribe vs Minion — ESO Addon Manager Comparison"
+  description="Side-by-side comparison of Scribe and Minion for ESO addon management. Native Go app vs Java, bulk uninstall, dependency detection."
+  breadcrumb={[{ label: 'Guides', href: '#' }, { label: 'Scribe vs Minion', href: '/minion-alternative' }]}
+>
+  <div class="page">
+    <div class="page__inner">
+      <h1>Scribe vs Minion</h1>
+      <p class="subtitle">The honest comparison. No fluff.</p>
+
+      <h2>Why people switch from Minion</h2>
+      <ul>
+        <li>Built on Java — higher memory footprint, slower cold start</li>
+        <li>Not open source — can't inspect or contribute</li>
+        <li>Dependency management is limited</li>
+        <li>Development has slowed way down</li>
+      </ul>
+
+      <h2>Feature comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Scribe</th>
+            <th>Minion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>License</td>
+            <td>MIT</td>
+            <td>Proprietary</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td>Free</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td>Runtime</td>
+            <td>Go (native)</td>
+            <td>Java</td>
+          </tr>
+          <tr>
+            <td>RAM</td>
+            <td>~50-60 MB</td>
+            <td>Higher</td>
+          </tr>
+          <tr>
+            <td>Startup</td>
+            <td>Instant</td>
+            <td>Several seconds</td>
+          </tr>
+          <tr>
+            <td>Windows / Linux / macOS</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Dependency detection</td>
+            <td>Automatic (metadata + description parsing)</td>
+            <td>Basic</td>
+          </tr>
+          <tr>
+            <td>Bulk updates</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Bulk uninstall</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Account needed</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Source code</td>
+            <td><a href="https://github.com/KelpHect/Scribe" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+            <td>Closed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Switching from Minion</h2>
+      <p>Nothing to migrate. Scribe reads your existing AddOns folder directly — all your installed addons, settings, and saved variables are already there.</p>
+      <ol>
+        <li><a href="/download">Download Scribe</a></li>
+        <li>Open it, confirm your AddOns path</li>
+        <li>Done. Uninstall Minion whenever you feel like it</li>
+      </ol>
+      <p>Both can coexist on the same machine. Run them side by side until you're comfortable.</p>
+
+      <h2>What Scribe doesn't do yet</h2>
+      <ul>
+        <li>Backup and restore</li>
+        <li>Addon favoriting / collections</li>
+      </ul>
+      <p>Want something? <a href="https://github.com/KelpHect/Scribe/issues" target="_blank" rel="noopener noreferrer">Open an issue</a>.</p>
+
+      <div style="margin-top: 2.5rem; text-align: center;">
+        <a href="/download" class="dl">Try Scribe</a>
+      </div>
+    </div>
+  </div>
+</Layout>

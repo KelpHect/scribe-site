@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+  {
+    q: 'Is Scribe free?',
+    a: 'Yes. No ads, no premium tier, no in-app purchases. MIT licensed, source on GitHub.'
+  },
+  {
+    q: 'Does it work on my OS?',
+    a: 'Windows 10+, macOS 11+, most modern Linux distros. See <a href="/supported-platforms">platforms</a> for details.'
+  },
+  {
+    q: 'Do I need an account?',
+    a: 'No. No login, no registration, no API keys. Download, open, go.'
+  },
+  {
+    q: 'Will it overwrite my addon settings?',
+    a: 'No. Saved variables and addon configs live in separate files that Scribe doesn\'t touch. Update, reinstall — your settings stay put.'
+  },
+  {
+    q: 'Can I run it alongside Minion?',
+    a: 'Yes. Both read the same AddOns folder with no conflicts. Try Scribe alongside Minion and switch whenever you\'re ready.'
+  },
+  {
+    q: 'Where does it install addons?',
+    a: 'Into your ESO AddOns folder (<code>Documents/Elder Scrolls Online/live/AddOns</code> by default). Changeable in settings.'
+  },
+  {
+    q: 'How much RAM does it use?',
+    a: '~50-60 MB. The UI is virtualized so addon count doesn\'t matter — 10 addons or 200, same performance.'
+  },
+  {
+    q: 'Does it manage addons for other games?',
+    a: 'No, just ESO right now. The architecture could support other games down the line but that\'s not the focus.'
+  },
+  {
+    q: 'How do I report a bug?',
+    a: '<a href="https://github.com/KelpHect/Scribe/issues" target="_blank" rel="noopener noreferrer">Open an issue</a> with your OS, Scribe version, and steps to reproduce.'
+  },
+  {
+    q: 'Is it affiliated with ZeniMax, Bethesda, or ESOUI?',
+    a: 'No. Independent community project. Not affiliated with or endorsed by anyone.'
+  },
+  {
+    q: 'How do I uninstall Scribe?',
+    a: 'Delete the app. It doesn\'t install system services or background processes. Your addons stay in the AddOns folder.'
+  },
+];
+---
+
+<Layout
+  title="FAQ — Scribe ESO Addon Manager"
+  description="Quick answers: is it free, does it need an account, RAM usage, Minion compatibility, and other common questions."
+  breadcrumb={[{ label: 'FAQ', href: '/faq' }]}
+  extraStructuredData={[{
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a.replace(/<[^>]*>/g, '')
+      }
+    }))
+  }]}
+>
+  <div class="page">
+    <div class="page__inner">
+      <h1>FAQ</h1>
+      <p class="subtitle">The short answers to the questions people actually ask.</p>
+
+      {faqs.map(faq => (
+        <div class="faq-item">
+          <h2>{faq.q}</h2>
+          <p set:html={faq.a} />
+        </div>
+      ))}
+
+      <div style="margin-top: 2rem;">
+        <p>Not here? <a href="https://github.com/KelpHect/Scribe/issues" target="_blank" rel="noopener noreferrer">Ask on GitHub</a>.</p>
+      </div>
+    </div>
+  </div>
+</Layout>

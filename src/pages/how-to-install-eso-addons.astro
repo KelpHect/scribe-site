@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="How to Install ESO Addons with Scribe"
+  description="Quick guide: install, update, and manage ESO addons with Scribe in under a minute. Works on Windows, Linux, macOS."
+  breadcrumb={[{ label: 'Guides', href: '#' }, { label: 'How to Install ESO Addons', href: '/how-to-install-eso-addons' }]}
+  extraStructuredData={[{
+    "@type": "HowTo",
+    "name": "How to Install ESO Addons with Scribe",
+    "description": "Quick guide to installing, updating, and managing ESO addons with Scribe.",
+    "totalTime": "PT2M",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Launch Scribe",
+        "text": "Open Scribe and confirm your ESO AddOns folder path. Auto-detected in most cases."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Find an addon",
+        "text": "Hit the Find More tab. Search by name or browse by category."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Install it",
+        "text": "Click install. Scribe downloads, extracts, and handles dependencies automatically."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Keep things updated",
+        "text": "Scribe checks for updates on launch. Click Update All or update individually."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Remove what you don't need",
+        "text": "Hit the trash button on any addon, or select multiple and bulk uninstall."
+      }
+    ]
+  }]}
+>
+  <div class="page">
+    <div class="page__inner">
+      <h1>How to Install ESO Addons</h1>
+      <p class="subtitle">The quick version. You'll be done in under a minute.</p>
+
+      <h2>Before you start</h2>
+      <ul>
+        <li>ESO installed and launched at least once</li>
+        <li><a href="/download">Scribe downloaded</a> for your platform</li>
+        <li>No ESOUI account or external account needed</li>
+      </ul>
+
+      <h2>Step 1: Open Scribe</h2>
+      <p>On first launch it asks for your ESO AddOns folder. Default paths:</p>
+      <ul>
+        <li><strong>Windows:</strong> <code>C:\Users\You\Documents\Elder Scrolls Online\live\AddOns</code></li>
+        <li><strong>macOS:</strong> <code>~/Documents/Elder Scrolls Online/live/AddOns</code></li>
+        <li><strong>Linux (Proton):</strong> <code>steamapps/compatdata/.../pfx/drive_c/users/steamuser/Documents/Elder Scrolls Online/live/AddOns</code></li>
+      </ul>
+      <p>Usually auto-detected. Just confirm it's right.</p>
+
+      <h2>Step 2: Find addons</h2>
+      <p>Click the "Find More" tab. Search by name, browse by category, or sort by popularity.</p>
+
+      <h2>Step 3: Install</h2>
+      <p>Click install on any addon. Scribe downloads it, extracts it, and checks for dependencies automatically. No ZIP files, no manual anything.</p>
+
+      <h2>Step 4: Update</h2>
+      <p>Scribe checks for updates every time you open it. Hit "Update All" or update individual ones — your call.</p>
+
+      <h2>Step 5: Uninstall</h2>
+      <p>Trash button on individual addons, or select multiple and bulk uninstall.</p>
+
+      <h2>Tips</h2>
+      <ul>
+        <li>Open Scribe before launching ESO to catch updates</li>
+        <li>Addon broken after an update? Check the <a href="/troubleshooting">troubleshooting guide</a></li>
+        <li>Your addon settings are safe — updates and reinstalls don't touch saved variables</li>
+        <li>Coming from Minion? See the <a href="/minion-alternative">side-by-side comparison</a></li>
+      </ul>
+    </div>
+  </div>
+</Layout>

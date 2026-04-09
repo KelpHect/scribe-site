@@ -1,21 +1,102 @@
 ---
 import '../styles/global.css';
 
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
   canonicalURL?: string;
+  breadcrumb?: BreadcrumbItem[];
+  extraStructuredData?: any[];
 }
 
 const {
   title = 'Scribe — Fast ESO Addon Manager',
   description = 'Scribe is a fast, free, open-source desktop addon manager for Elder Scrolls Online. Install, update, and manage your ESO addons without the bloat.',
-  canonicalURL = new URL(Astro.url.pathname, Astro.site).href
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  breadcrumb,
+  extraStructuredData = [],
 } = Astro.props;
 
 const siteName = 'Scribe';
 const siteUrl = Astro.site!.href;
 const ogImage = new URL('/og.png', Astro.site).href;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/features', label: 'Features' },
+  { href: '/download', label: 'Download' },
+  { href: '/faq', label: 'FAQ' },
+];
+
+const graphItems: any[] = [
+  {
+    "@type": "WebSite",
+    "name": "Scribe",
+    "alternateName": ["Scribe ESO", "Scribe Addon Manager", "Scribe ESO Addon Manager"],
+    "url": siteUrl
+  },
+  {
+    "@type": "SoftwareApplication",
+    "name": "Scribe",
+    "description": description,
+    "url": siteUrl,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": ["Windows", "Linux", "macOS"],
+    "screenshot": [
+      new URL('/app-examples/installed.webp', Astro.site).href,
+      new URL('/app-examples/find-more.webp', Astro.site).href,
+      new URL('/app-examples/dependencies.webp', Astro.site).href,
+    ],
+    "downloadUrl": "https://github.com/KelpHect/Scribe/releases",
+    "softwareVersion": "1.0.3",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/KelpHect/Scribe",
+    "programmingLanguage": ["Go", "TypeScript", "Svelte"],
+    "sameAs": "https://github.com/KelpHect/Scribe",
+    "author": {
+      "@type": "Person",
+      "name": "Mário Silva"
+    }
+  },
+  {
+    "@type": "Organization",
+    "name": "Rustic Stack",
+    "url": "https://rusticstack.com"
+  }
+];
+
+if (breadcrumb && breadcrumb.length > 0) {
+  graphItems.push({
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      ...breadcrumb.map((item: BreadcrumbItem, i: number) => ({
+        "@type": "ListItem",
+        "position": i + 2,
+        "name": item.label,
+        ...(i < breadcrumb.length - 1 ? { "item": new URL(item.href, Astro.site).href } : {})
+      }))
+    ]
+  });
+}
+
+graphItems.push(...extraStructuredData);
 ---
 
 <!doctype html>
@@ -28,6 +109,7 @@ const ogImage = new URL('/og.png', Astro.site).href;
     <link rel="icon" type="image/png" href="/appicon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/appicon.png" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#09090b" />
     <meta name="color-scheme" content="dark" />
@@ -42,7 +124,7 @@ const ogImage = new URL('/og.png', Astro.site).href;
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Scribe app icon" />
+    <meta property="og:image:alt" content="Scribe — ESO addon manager for Windows, Linux, and macOS" />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -52,27 +134,78 @@ const ogImage = new URL('/og.png', Astro.site).href;
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Scribe",
-      "description": description,
-      "url": siteUrl,
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": ["Windows", "Linux", "macOS"],
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "license": "https://opensource.org/licenses/MIT",
-      "codeRepository": "https://github.com/KelpHect/Scribe",
-      "programmingLanguage": ["Go", "TypeScript", "Svelte"],
-      "author": {
-        "@type": "Person",
-        "name": "Mário Silva"
-      }
+      "@graph": graphItems
     })} />
   </head>
   <body>
-    <slot />
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__links">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class:list={['nav__link', { 'nav__link--active': Astro.url.pathname === link.href || (link.href !== '/' && Astro.url.pathname.startsWith(link.href)) }]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <div class="grid-bg" aria-hidden="true"></div>
+    <svg class="noise" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)" opacity="0.035"/></svg>
+
+    <main class:list={[breadcrumb && breadcrumb.length > 0 && 'has-breadcrumb']}>
+      {breadcrumb && breadcrumb.length > 0 && (
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <div class="breadcrumb__inner">
+            <ol class="breadcrumb__list">
+              <li><a href="/">Home</a></li>
+              {breadcrumb.map((item, i) => (
+                <li>
+                  <span class="breadcrumb__sep" aria-hidden="true">/</span>
+                  {i === breadcrumb.length - 1 ? (
+                    <span aria-current="page">{item.label}</span>
+                  ) : (
+                    <a href={item.href}>{item.label}</a>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </nav>
+      )}
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__col">
+          <p class="site-footer__brand">Scribe</p>
+          <p class="site-footer__tagline">Fast, free, open-source ESO addon manager.</p>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Product</p>
+          <a href="/features">Features</a>
+          <a href="/download">Download</a>
+          <a href="/changelog">Changelog</a>
+          <a href="/supported-platforms">Supported Platforms</a>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Guides</p>
+          <a href="/how-to-install-eso-addons">Install ESO Addons</a>
+          <a href="/troubleshooting">Troubleshooting</a>
+          <a href="/minion-alternative">Minion Alternative</a>
+          <a href="/faq">FAQ</a>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Community</p>
+          <a href="https://github.com/KelpHect/Scribe" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p>Not affiliated with ZeniMax Media, Bethesda, or ESOUI.</p>
+        <p>&copy; {new Date().getFullYear()} Scribe. MIT License.</p>
+      </div>
+    </footer>
   </body>
 </html>
