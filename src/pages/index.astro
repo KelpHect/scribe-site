@@ -1,11 +1,70 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const repoUrl = 'https://github.com/KelpHect/Scribe';
+
+const downloads = [
+  { label: 'Windows', href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.2/Scribe-windows-amd64.exe', icon: '/icons/windows.svg' },
+  { label: 'Linux',   href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.2/Scribe-linux-amd64',       icon: '/icons/linux.svg'   },
+  { label: 'macOS',   href: 'https://github.com/KelpHect/Scribe/releases/download/v1.0.2/Scribe-macos-universal.zip', icon: '/icons/apple.svg' }
+];
+
+const screenshots = [
+  '/app-examples/installed.webp',
+  '/app-examples/find-more.webp',
+  '/app-examples/dependencies.webp',
+  '/app-examples/addon-details.webp',
+  '/app-examples/addon-details-lightbox.webp',
+  '/app-examples/addon-details-installed.webp'
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Scribe" description="A fast ESO addon manager for people who are done fighting Minion.">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <svg class="noise" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)" opacity="0.035"/></svg>
+
+  <main class="v">
+    <header class="head">
+      <p class="head__badge">Free &amp; Open Source</p>
+      <h1 class="head__title">Scribe</h1>
+      <p class="head__sub">A fast ESO addon manager for people who are done babysitting Minion.</p>
+      <a href={repoUrl} class="gh">
+        <img src="/icons/github.svg" alt="" class="gh__icon" />
+        <span>View on GitHub</span>
+      </a>
+    </header>
+
+    <section class="stage">
+      <div class="img-wrap" id="slides">
+        {screenshots.map((src, i) => (
+          <img src={src} alt={`Scribe screenshot ${i + 1}`} class="slide" data-i={i} loading={i > 0 ? 'lazy' : 'eager'} />
+        ))}
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p class="foot__label">Download</p>
+      <div class="foot__links">
+        {downloads.map((dl) => (
+          <a href={dl.href} class="dl">
+            <img src={dl.icon} alt="" class="dl__icon" />
+            <span>{dl.label}</span>
+          </a>
+        ))}
+      </div>
+      <p class="foot__note">Not affiliated with ZeniMax Media, Bethesda, or ESOUI.</p>
+    </footer>
+  </main>
+
+  <script define:vars={{ count: screenshots.length }}>
+    const slides = document.querySelectorAll('.slide');
+    let cur = 0;
+    slides[0].classList.add('slide--on');
+    setInterval(() => {
+      slides[cur].classList.remove('slide--on');
+      cur = (cur + 1) % count;
+      slides[cur].classList.add('slide--on');
+    }, 3800);
+  </script>
+
 </Layout>
